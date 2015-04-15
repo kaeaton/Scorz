@@ -1,0 +1,3 @@
+class Report < ActiveRecord::Base
+  # Remember to create a migration!
+end
