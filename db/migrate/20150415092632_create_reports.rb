@@ -1,5 +1,6 @@
 class CreateReports < ActiveRecord::Migration
   def change
-  	create_table do |t|
+  	create_table :reports do |t|
+  		
   end
 end
