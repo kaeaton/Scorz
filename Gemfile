@@ -16,6 +16,8 @@ gem 'rake'
 gem 'shotgun'
 
 gem 'unirest'
+gem 'httparty'
+gem 'dotenv'
 
 group :test do
   gem 'shoulda-matchers'
