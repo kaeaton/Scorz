@@ -3,9 +3,13 @@ require 'httparty'
 require 'dotenv'
 
 get '/' do
+  erb :index
+end
 
-	latitude = 37.890
-	longitude = -122.293
+get '/crime-data' do
+
+	latitude = 37.656
+	longitude = -122.096
 
   response = Unirest.get "https://jgentes-Crime-Data-v1.p.mashape.com/crime?enddate=4%2F20%2F2015&lat="+latitude.to_s+"&long="+longitude.to_s+"&startdate=+1%2F1%2F2015",
   headers:{
@@ -36,18 +40,20 @@ get '/' do
                     )
     end
   end
-  # {drugs: drugs}.to_json
-
-
-	erb :index
+	erb :seeding
 end
 
-get '/sf'
+get '/sf' do
 
-  # response = HTTParty.get ("http://sanfrancisco.crimespotting.org/crime-data?format=json&count=200&type=Na&dstart=2015-01-01")
+  response = HTTParty.get ("http://sanfrancisco.crimespotting.org/crime-data?format=json&count=200&type=Na&dstart=2015-01-01")
 
-  # @sfdata = response[1]
+  @data = response["features"]
+  @data.each do |crime|
+    Report.create(popo_id: crime["id"],
+                  description: crime["properties"]["description"],
+                  lat: crime["geometry"]["coordinates"][1],
+                  long: crime["geometry"]["coordinates"][0])
+  end
 
-  erb :index
-
+  erb :seeding
 end
