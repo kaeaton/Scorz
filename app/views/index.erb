@@ -1,8 +1,16 @@
 <img src="/img/Scorz.png" alt="Scorz" />
 
+<div class="dropdown">
+  <form action="/drugs" method="get">
+    <select>
+      <option name="MARIJUANA">Marijuana</option>
+      <option name="COCAINE">Cocaine &amp; Crack</option>
+      <option name="HEROIN">Heroin</option>
+      <option name="METH">Methamphetamine</option>
+      <option name="OPIUM">Opium</option>
+
+    </select>
+  </form>
+</div>
+
 <div id="map-canvas"></div>
-<ul>
-  <% @marijuana.each do |score| %>
-    <li><%=score.description%></li>
-  <% end %>
-</ul>

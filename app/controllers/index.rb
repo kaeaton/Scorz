@@ -19,10 +19,10 @@ post '/' do
   {reports: latlong}.to_json
 end
 
-get '/marijuana' do
-  @marijuana = Report.where("description LIKE ?", '%COCAINE%')
+get '/drugs' do
+  @drugs = Report.where("description LIKE ?", '%HEROIN%')
   scores = {}
-  @marijuana.each do |report|
+  @drugs.each do |report|
     latlong = [report.long.to_f, report.lat.to_f]
     scores[report.id.to_i] = latlong
   end
@@ -70,7 +70,7 @@ end
 
 get '/sf' do
 
-  response = HTTParty.get ("http://sanfrancisco.crimespotting.org/crime-data?format=json&count=200&type=Na&dstart=2015-01-01")
+  response = HTTParty.get ("http://sanfrancisco.crimespotting.org/crime-data?format=json&count=1000&type=Na&dstart=2015-01-01")
 
   @data = response["features"]
   @data.each do |crime|

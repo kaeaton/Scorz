@@ -5,8 +5,8 @@ $(document).ready(function() {
   var map;
   function initialize() {
     var mapOptions = {
-      zoom: 10,
-      center: new google.maps.LatLng(37.804, -122.270)
+      zoom: 13,
+      center: new google.maps.LatLng(37.75, -122.445)
     };
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
@@ -18,7 +18,7 @@ $(document).ready(function() {
 
   // Load the scores data. When the data comes back, create an overlay.
 
-  d3.json("/marijuana", function(data){
+  d3.json("/drugs", function(data){
     console.log(data)
     var overlay = new google.maps.OverlayView();
     // Add the container when the overlay is added to the map.
