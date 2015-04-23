@@ -3,30 +3,29 @@ require 'httparty'
 require 'dotenv'
 
 get '/' do
-  @marijuana = Report.where("description LIKE ?", '%OPIUM%')
 
   erb :index
 end
 
-post '/' do
-  @marijuana = Report.where("description LIKE ?", '%MARIJUANA%')
-  latlong = []
-  @marijuana.each do |report|
-    latlong << [report.long, report.lat]
-  end
+# post '/' do
+#   @marijuana = Report.where("description LIKE ?", '%MARIJUANA%')
+#   latlong = []
+#   @marijuana.each do |report|
+#     latlong << [report.long, report.lat]
+#   end
 
-  content_type :json
-  {reports: latlong}.to_json
-end
+#   content_type :json
+#   {reports: latlong}.to_json
+# end
 
 get '/drugs' do
-  @drugs = Report.where("description LIKE ?", '%HEROIN%')
+  @transport = params[:drugs].to_s
+  @drugs = Report.where("description LIKE ?", '%'+@transport+'%')
   scores = {}
   @drugs.each do |report|
     latlong = [report.long.to_f, report.lat.to_f]
     scores[report.id.to_i] = latlong
   end
-  p scores
   content_type :json
   scores.to_json
 end

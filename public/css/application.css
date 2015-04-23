@@ -10,8 +10,9 @@ html, body, #map-canvas {
 
 img {padding-bottom: 20px;}
 
-.dropdown {
+.menu {
   float: right;
+  margin: 150px 70px 0 0;
 }
 
 .scores, .scores svg {
