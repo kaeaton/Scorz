@@ -3,6 +3,9 @@ require 'httparty'
 require 'dotenv'
 
 get '/' do
+  @marijuana = Report.where("description LIKE ?", '%MARIJUANA%')
+  # content_type :json
+  {reports: @marijuana}.to_json
   erb :index
 end
 
