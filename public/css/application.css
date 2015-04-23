@@ -8,3 +8,16 @@ html, body, #map-canvas {
       }
 
 img {padding-bottom: 20px;}
+
+.scores, .scores svg {
+  position: absolute;
+}
+
+.scores circle {
+  fill: green;
+  stroke: black;
+  stroke-width: 1.5px;
+  opacity: 50%;
+}
+
+
