@@ -29,7 +29,6 @@ $(document).ready(function() {
       datatype: 'json'
     })
     dropDown.done(function(data){
-      console.log(data)
 
   // Load the scores data. When the data comes back, create an overlay.
 
