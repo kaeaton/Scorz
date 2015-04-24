@@ -63,12 +63,20 @@ $(document).ready(function() {
               // var drugType = x.value[2];
               // d = new google.maps.LatLng(d.value[1], d.value[0]);
               // d = projection.fromLatLngToDivPixel(d);
-              if (drugType === "MARUJANA"){
-                d3.select(this)
-                  .append("svg:circle")
-                  .attr("r", 4.5)
+              // if (drugType == "MARIJUANA"){
+                // d3.select(this)
+                  marker.append("svg:circle")
+                  .attr("r", 5)
+                  .style("fill", function(d) {
+                    if ("MARIJUANA" === drugType) {return "green"}
+                    else if ("COCAINE" === drugType) {return "red"}
+                    if ("METH" === drugType) {return "blue"}
+                    if ("HEROIN" === drugType) {return "yellow"}
+                    else { return "purple" }
+                  ;})
                   .attr("cx", padding)
-                  .attr("cy", padding);
+                  .attr("cy", padding)
+
               // }else{
               //   return d3.select(this)
               //     .append("svg:rect")
@@ -76,7 +84,7 @@ $(document).ready(function() {
               //     .attr("ry", 4.5)
               //     .attr("x", padding)
               //     .attr("y", padding);
-              }
+              // }
             // })
             // console.log(formData)
             // if ( formData === "drugs=MARIJUANA"){
@@ -99,13 +107,13 @@ $(document).ready(function() {
 
 
             // Add a label.
-            $("circle").on("click", function(){
+            // $("circle").on("click", function(){
               marker.append("svg:text")
                   .attr("x", padding + 7)
                   .attr("y", padding)
                   .attr("dy", ".31em")
                   .text(function(d) { return d.value[2]; });
-            })
+            // })
 
 
 
