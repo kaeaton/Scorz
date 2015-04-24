@@ -70,8 +70,8 @@ $(document).ready(function() {
                   .style("fill", function(d) {
                     if ("MARIJUANA" === drugType) {return "green"}
                     else if ("COCAINE" === drugType) {return "red"}
-                    if ("METH" === drugType) {return "blue"}
-                    if ("HEROIN" === drugType) {return "yellow"}
+                    else if ("METH" === drugType) {return "blue"}
+                    else if ("HEROIN" === drugType) {return "yellow"}
                     else { return "purple" }
                   ;})
                   .attr("cx", padding)
