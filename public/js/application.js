@@ -28,8 +28,8 @@ $(document).ready(function() {
       data: formData,
       datatype: 'json'
     })
-    dropDown.done(function(data){
-    console.log(data)
+    dropDown.done(function(ajaxResults){
+    console.log(ajaxResults)
 
   // Load the scores data. When the data comes back, create an overlay.
 
@@ -47,26 +47,50 @@ $(document).ready(function() {
                 padding = 10;
 
             var marker = layer.selectAll("svg")
-                              .data(d3.entries(data))
+                              .data(d3.entries(ajaxResults))
                               .each(transform) // update existing markers
                               .enter().append("svg:svg")
                               .each(transform)
-                              .attr("class", "marker");
+                              .attr("class", "marker")
+                              .each(transform)
 
-            // var type = function(d) { return d.value[2]; }
-            console.log(marker.text(function(d) { return d.value[2]; }))
-            if ( marker.text(function(d) { return d.value[2]; }) === "MARIJUANA"){
-              marker.append("svg:circle")
-                    .attr("r", 4.5)
-                    .attr("cx", padding)
-                    .attr("cy", padding);
-            } else if (marker.text(function(d) { return d.value[2]; }) === "COCAINE") {
-              marker.append("svg:rect")
-                    .attr("rx", 4.5)
-                    .attr("ry", 4.5)
-                    .attr("x", padding)
-                    .attr("y", padding)
-            }
+            // var type = function(data) { return data.value[0][2]; }
+
+            // marker.each(function(x){
+              var firstObject = Object.keys(ajaxResults)[0];
+              var drugType = ajaxResults[firstObject][2]
+              console.log(drugType);
+              // var drugType = x.value[2];
+              // d = new google.maps.LatLng(d.value[1], d.value[0]);
+              // d = projection.fromLatLngToDivPixel(d);
+              if (drugType === "MARUJANA"){
+                d3.select(this)
+                  .append("svg:circle")
+                  .attr("r", 4.5)
+                  .attr("cx", padding)
+                  .attr("cy", padding);
+              // }else{
+              //   return d3.select(this)
+              //     .append("svg:rect")
+              //     .attr("rx", 4.5)
+              //     .attr("ry", 4.5)
+              //     .attr("x", padding)
+              //     .attr("y", padding);
+              }
+            // })
+            // console.log(formData)
+            // if ( formData === "drugs=MARIJUANA"){
+            //   marker.append("svg:circle")
+            //         .attr("r", 4.5)
+            //         .attr("cx", padding)
+            //         .attr("cy", padding);
+            // } else if (marker.text(function(d) { return d.value[2]; }) === "COCAINE") {
+            //   marker.append("svg:rect")
+            //         .attr("rx", 4.5)
+            //         .attr("ry", 4.5)
+            //         .attr("x", padding)
+            //         .attr("y", padding)
+            // }
               // Add a circle.
 
 
