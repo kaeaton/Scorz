@@ -29,6 +29,7 @@ $(document).ready(function() {
       datatype: 'json'
     })
     dropDown.done(function(data){
+    console.log(data)
 
   // Load the scores data. When the data comes back, create an overlay.
 
@@ -52,11 +53,39 @@ $(document).ready(function() {
                               .each(transform)
                               .attr("class", "marker");
 
-            // Add a circle.
-            marker.append("svg:circle")
-                  .attr("r", 4.5)
-                  .attr("cx", padding)
-                  .attr("cy", padding);
+            // var type = function(d) { return d.value[2]; }
+            console.log(marker.text(function(d) { return d.value[2]; }))
+            if ( marker.text(function(d) { return d.value[2]; }) === "MARIJUANA"){
+              marker.append("svg:circle")
+                    .attr("r", 4.5)
+                    .attr("cx", padding)
+                    .attr("cy", padding);
+            } else if (marker.text(function(d) { return d.value[2]; }) === "COCAINE") {
+              marker.append("svg:rect")
+                    .attr("rx", 4.5)
+                    .attr("ry", 4.5)
+                    .attr("x", padding)
+                    .attr("y", padding)
+            }
+              // Add a circle.
+
+
+
+
+
+
+            // Add a label.
+            $("circle").on("click", function(){
+              marker.append("svg:text")
+                  .attr("x", padding + 7)
+                  .attr("y", padding)
+                  .attr("dy", ".31em")
+                  .text(function(d) { return d.value[2]; });
+            })
+
+
+
+
             function transform(d) {
               d = new google.maps.LatLng(d.value[1], d.value[0]);
               d = projection.fromLatLngToDivPixel(d);

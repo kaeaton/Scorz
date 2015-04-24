@@ -23,7 +23,7 @@ get '/drugs' do
   @drugs = Report.where("description LIKE ?", '%'+@transport+'%')
   scores = {}
   @drugs.each do |report|
-    latlong = [report.long.to_f, report.lat.to_f]
+    latlong = [report.long.to_f, report.lat.to_f, "#{@transport}"]
     scores[report.id.to_i] = latlong
   end
   content_type :json
