@@ -1,4 +1,5 @@
 html, body, #map-canvas {
+
         height: 100%;
         margin: auto;
         padding: 0px;
@@ -7,6 +8,8 @@ html, body, #map-canvas {
         color: white;
         clear: both;
       }
+
+
 
 img {padding-bottom: 20px;}
 
@@ -26,4 +29,8 @@ img {padding-bottom: 20px;}
   opacity: 50%;
 }
 
-
+.scores rect {
+  fill: red;
+  stroke: black;
+  stroke-width: 1.5px;
+}
