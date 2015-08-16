@@ -1,5 +1,26 @@
 $(document).ready(function() {
 
+function styling(drugType){
+  switch(drugType){
+    case "MARIJUANA":
+      console.log("red marijuana")
+      return "red";
+      break;
+    case "COCAINE":
+      return "red";
+      break;
+    case "METH":
+      return "blue";
+      break;
+    case "HEROIN":
+      return "yellow";
+      break;
+    default:
+      return "purple";
+  }
+}
+
+
   //Google Map
 
   var map;
@@ -65,14 +86,17 @@ $(document).ready(function() {
               // d = projection.fromLatLngToDivPixel(d);
               // if (drugType == "MARIJUANA"){
                 // d3.select(this)
+
+
                   marker.append("svg:circle")
                   .attr("r", 5)
                   .style("fill", function(d) {
-                    if ("MARIJUANA" === drugType) {return "green"}
-                    else if ("COCAINE" === drugType) {return "red"}
-                    else if ("METH" === drugType) {return "blue"}
-                    else if ("HEROIN" === drugType) {return "yellow"}
-                    else { return "purple" }
+                    return styling(drugType);
+                    // if ("MARIJUANA" === drugType) {return "green"}
+                    // else if ("COCAINE" === drugType) {return "red"}
+                    // else if ("METH" === drugType) {return "blue"}
+                    // else if ("HEROIN" === drugType) {return "yellow"}
+                    // else { return "purple" }
                   ;})
                   .attr("cx", padding)
                   .attr("cy", padding)
@@ -108,11 +132,11 @@ $(document).ready(function() {
 
             // Add a label.
             // $("circle").on("click", function(){
-              marker.append("svg:text")
-                  .attr("x", padding + 7)
-                  .attr("y", padding)
-                  .attr("dy", ".31em")
-                  .text(function(d) { return d.value[2]; });
+              // marker.append("svg:text")
+              //     .attr("x", padding + 7)
+              //     .attr("y", padding)
+              //     .attr("dy", ".31em")
+              //     .text(function(d) { return d.value[2]; });
             // })
 
 
