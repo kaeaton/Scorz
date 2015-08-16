@@ -1,22 +1,23 @@
 $(document).ready(function() {
 
+// determine color and transparency of the markers
+
 function styling(drugType){
   switch(drugType){
     case "MARIJUANA":
-      console.log("red marijuana")
-      return "red";
+      return "rgba(0, 155, 0, 0.33)";
       break;
     case "COCAINE":
-      return "red";
+      return "rgba(255, 0, 0, 0.33)";
       break;
     case "METH":
-      return "blue";
+      return "rgba(0, 0, 255, 0.33)";
       break;
     case "HEROIN":
-      return "yellow";
+      return "rgba(155, 155, 0, 0.33)";
       break;
     default:
-      return "purple";
+      return "rgba(255, 0, 255, 0.33)";
   }
 }
 
@@ -90,6 +91,7 @@ function styling(drugType){
 
                   marker.append("svg:circle")
                   .attr("r", 5)
+                  .attr("stroke", "blue")
                   .style("fill", function(d) {
                     return styling(drugType);
                     // if ("MARIJUANA" === drugType) {return "green"}
@@ -97,7 +99,8 @@ function styling(drugType){
                     // else if ("METH" === drugType) {return "blue"}
                     // else if ("HEROIN" === drugType) {return "yellow"}
                     // else { return "purple" }
-                  ;})
+                  })
+                  .style({'stroke': 'black', 'stroke-width': 0.5})
                   .attr("cx", padding)
                   .attr("cy", padding)
 
@@ -157,11 +160,6 @@ function styling(drugType){
 
     })
   })
-
-
-
-
-
 
 
 
