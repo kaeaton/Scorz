@@ -5,19 +5,19 @@ $(document).ready(function() {
 function styling(drugType){
   switch(drugType){
     case "MARIJUANA":
-      return "rgba(0, 155, 0, 0.33)";
+      return "rgba(74, 145, 48, 0.5)";
       break;
     case "COCAINE":
-      return "rgba(255, 0, 0, 0.33)";
+      return "rgba(255, 0, 0, 0.5)";
       break;
     case "METH":
-      return "rgba(0, 0, 255, 0.33)";
+      return "rgba(0, 0, 255, 0.5)";
       break;
     case "HEROIN":
-      return "rgba(200, 200, 0, 0.33)";
+      return "rgba(255, 162, 16, 0.5)";
       break;
     default:
-      return "rgba(255, 0, 255, 0.33)";
+      return "rgba(72, 0, 32, 0.5)";
   }
 }
 
@@ -66,7 +66,7 @@ function styling(drugType){
           // We could use a single SVG, but what size would it have?
           overlay.draw = function() {
             var projection = this.getProjection(),
-                padding = 10;
+                padding = 12;
 
             var marker = layer.selectAll("svg")
                               .data(d3.entries(ajaxResults))
@@ -92,14 +92,7 @@ function styling(drugType){
                   marker.append("svg:circle")
                   .attr("r", 5)
                   .attr("stroke", "blue")
-                  .style("fill", function(d) {
-                    return styling(drugType);
-                    // if ("MARIJUANA" === drugType) {return "green"}
-                    // else if ("COCAINE" === drugType) {return "red"}
-                    // else if ("METH" === drugType) {return "blue"}
-                    // else if ("HEROIN" === drugType) {return "yellow"}
-                    // else { return "purple" }
-                  })
+                  .style("fill", function(d) { return styling(drugType) })
                   .style({'stroke': 'black', 'stroke-width': 0.5})
                   .attr("cx", padding)
                   .attr("cy", padding)
