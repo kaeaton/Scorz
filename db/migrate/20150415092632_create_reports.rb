@@ -5,6 +5,7 @@ class CreateReports < ActiveRecord::Migration
   		t.string :description
   		t.decimal :lat
   		t.decimal :long
+  		t.datetime :datetime
 
   		t.timestamps
   	end

@@ -2,24 +2,31 @@ $(document).ready(function() {
 
 // determine color and transparency of the markers
 
-function styling(drugType){
-  switch(drugType){
-    case "MARIJUANA":
-      return "rgba(74, 145, 48, 0.5)";
-      break;
-    case "COCAINE":
-      return "rgba(255, 0, 0, 0.5)";
-      break;
-    case "METH":
-      return "rgba(0, 0, 255, 0.5)";
-      break;
-    case "HEROIN":
-      return "rgba(255, 162, 16, 0.5)";
-      break;
-    default:
-      return "rgba(72, 0, 32, 0.5)";
+  function styling(drugType){
+    switch(drugType){
+      case "MARIJUANA":
+        console.log("switch")
+        return "rgba(74, 145, 48, 0.2)";
+        break;
+      case "COCAINE":
+        return "rgba(255, 0, 0, 0.2)";
+        break;
+      case "METH":
+        return "rgba(0, 0, 255, 0.2)";
+        break;
+      case "HEROIN":
+        return "rgba(100, 16, 16, 0.2)";
+        break;
+      case "HALLUCINOGENIC":
+        return "rgba(0, 0, 0, 0.2)"
+        break;
+      case "OPIUM":
+        return "rgba(72, 0, 32, 0.2)"
+        break;
+      default:
+        return "rgba(72, 0, 32, 0.2)";
+    }
   }
-}
 
 
   //Google Map
@@ -35,8 +42,11 @@ function styling(drugType){
   }
 
   google.maps.event.addDomListener(window, 'load', initialize);
+  google.maps.event.addDomListener(window, "zoom_changed", initialize);
 
   // End Google Map
+
+
   $("#dropdown").change(function(event){
     // event.preventDefault
     var formData = $(event.target).serialize()
@@ -76,64 +86,35 @@ function styling(drugType){
                               .attr("class", "marker")
                               .each(transform)
 
-            // var type = function(data) { return data.value[0][2]; }
 
-            // marker.each(function(x){
-              var firstObject = Object.keys(ajaxResults)[0];
-              var drugType = ajaxResults[firstObject][2]
-              console.log(drugType);
-              // var drugType = x.value[2];
-              // d = new google.maps.LatLng(d.value[1], d.value[0]);
-              // d = projection.fromLatLngToDivPixel(d);
-              // if (drugType == "MARIJUANA"){
-                // d3.select(this)
+            var firstObject = Object.keys(ajaxResults)[0];
+            var drugType = ajaxResults[firstObject][2]
+            console.log(drugType);
 
-
-                  marker.append("svg:circle")
-                  .attr("r", 5)
-                  .attr("stroke", "blue")
+            marker.append("svg:circle")
+                  .attr("r", 4)
+                  // .append("stop").attr("offset", "100%")
+                  // .style("stop-color", function(d) { return styling(drugType); })
+                  //             .append("radialGradient")
+                  //             // .attr("gradientUnits", "userSpaceOnUse")
+                  //             .attr("cx", padding)
+                  //             .attr("cy", padding)
+                  //             .attr("r", "40%")
+                  //             .attr("id", function(d, i) { return "grad" + i; })
+                  //             .style("stop-color", function(d) { return styling(drugType); })
                   .style("fill", function(d) { return styling(drugType) })
-                  .style({'stroke': 'black', 'stroke-width': 0.5})
+                  .style({'stroke': 'black', 'stroke-width': 0.0})
                   .attr("cx", padding)
                   .attr("cy", padding)
 
-              // }else{
-              //   return d3.select(this)
-              //     .append("svg:rect")
-              //     .attr("rx", 4.5)
-              //     .attr("ry", 4.5)
-              //     .attr("x", padding)
-              //     .attr("y", padding);
-              // }
-            // })
-            // console.log(formData)
-            // if ( formData === "drugs=MARIJUANA"){
-            //   marker.append("svg:circle")
-            //         .attr("r", 4.5)
-            //         .attr("cx", padding)
-            //         .attr("cy", padding);
-            // } else if (marker.text(function(d) { return d.value[2]; }) === "COCAINE") {
-            //   marker.append("svg:rect")
-            //         .attr("rx", 4.5)
-            //         .attr("ry", 4.5)
-            //         .attr("x", padding)
-            //         .attr("y", padding)
-            // }
-              // Add a circle.
-
-
-
-
-
-
-            // Add a label.
-            // $("circle").on("click", function(){
-              // marker.append("svg:text")
-              //     .attr("x", padding + 7)
-              //     .attr("y", padding)
-              //     .attr("dy", ".31em")
-              //     .text(function(d) { return d.value[2]; });
-            // })
+              // Add a label.
+              // $("circle").on("click", function(){
+                // marker.append("svg:text")
+                //     .attr("x", padding + 7)
+                //     .attr("y", padding)
+                //     .attr("dy", ".31em")
+                //     .text(function(d) { return d.value[2]; });
+              // })
 
 
 
