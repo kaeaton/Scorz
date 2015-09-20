@@ -69,16 +69,16 @@ end
 
 get '/sf' do
 
-  response = HTTParty.get ("http://sanfrancisco.crimespotting.org/crime-data?format=json&count=10000&type=Na&dstart=2009-01-01&dend=2013-05-31")
+  response = HTTParty.get ("http://sanfrancisco.crimespotting.org/crime-data?format=json&count=10&type=Na&dstart=2009-01-01&dend=2013-05-31")
 
   @data = response["features"]
   @data.each do |crime|
-    unless crime["description"].to_s.include? "PARAPHERNALIA"
+    unless crime["properties"]["description"].to_s.include? "PARAPHERNALIA"
       Report.create(popo_id: crime["id"],
                     description: crime["properties"]["description"],
                     lat: crime["geometry"]["coordinates"][1],
                     long: crime["geometry"]["coordinates"][0],
-                    datetime: crime["date_time"])
+                    datetime: crime["properties"]["date_time"])
     end
   end
 
