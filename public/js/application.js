@@ -6,25 +6,25 @@ $(document).ready(function() {
     switch(drugType){
       case "MARIJUANA":
         console.log("switch")
-        return "rgba(74, 145, 48, 0.2)";
+        return "rgba(74, 145, 48, 0.3)";
         break;
       case "COCAINE":
-        return "rgba(255, 0, 0, 0.2)";
+        return "rgba(255, 0, 0, 0.3)";
         break;
       case "METH":
-        return "rgba(0, 0, 255, 0.2)";
+        return "rgba(0, 0, 255, 0.3)";
         break;
       case "HEROIN":
-        return "rgba(100, 16, 16, 0.2)";
+        return "rgba(100, 16, 16, 0.3)";
         break;
       case "HALLUCINOGENIC":
-        return "rgba(0, 0, 0, 0.2)"
+        return "rgba(0, 0, 0, 0.3)"
         break;
       case "OPIUM":
-        return "rgba(72, 0, 32, 0.2)"
+        return "rgba(72, 0, 32, 0.7)"
         break;
       default:
-        return "rgba(72, 0, 32, 0.2)";
+        return "rgba(72, 0, 32, 0.3)";
     }
   }
 
@@ -47,9 +47,12 @@ $(document).ready(function() {
   // End Google Map
 
 
-  $("#dropdown").change(function(event){
+  $("#options").change(function(event){
     // event.preventDefault
-    var formData = $(event.target).serialize()
+    if ($("#dealers").serialize() == "dealers=true")
+      {var formData = $("#dropdown").serialize() + "&" + $("#dealers").serialize()}
+    else
+      {var formData = $("#dropdown").serialize() + "&dealers=false"}
     console.log(formData)
     $(".scores").empty()
     //Get data from dropdown
@@ -103,7 +106,7 @@ $(document).ready(function() {
                   //             .attr("id", function(d, i) { return "grad" + i; })
                   //             .style("stop-color", function(d) { return styling(drugType); })
                   .style("fill", function(d) { return styling(drugType) })
-                  .style({'stroke': 'black', 'stroke-width': 0.0})
+                  .style({'stroke': 'black', 'stroke-width': 0.2})
                   .attr("cx", padding)
                   .attr("cy", padding)
 

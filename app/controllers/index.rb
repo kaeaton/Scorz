@@ -20,56 +20,70 @@ end
 
 get '/drugs' do
   @transport = params[:drugs].to_s
+  @dealer = params[:dealers].to_s
+  puts @dealer
+  puts @transport
   @drugs = Report.where("description LIKE ?", '%'+@transport+'%')
   scores = {}
-  @drugs.each do |report|
-    latlong = [report.long.to_f, report.lat.to_f, "#{@transport}"]
-    scores[report.id.to_i] = latlong
+  if @dealer == "false"
+    @drugs.each do |report|
+      # if report.sale == false
+        latlong = [report.long.to_f, report.lat.to_f, "#{@transport}"]
+        scores[report.id.to_i] = latlong
+      # end
+    end
+  else
+    @drugs.each do |report|
+      if report.sale == true
+        latlong = [report.long.to_f, report.lat.to_f, "#{@transport}"]
+        scores[report.id.to_i] = latlong
+      end
+    end
   end
   content_type :json
   scores.to_json
 end
 
-get '/crime-data' do
+# get '/crime-data' do
 
-	latitude = 37.656
-	longitude = -122.096
+# 	latitude = 37.656
+# 	longitude = -122.096
 
-  response = Unirest.get "https://jgentes-Crime-Data-v1.p.mashape.com/crime?enddate=4%2F20%2F2015&lat="+latitude.to_s+"&long="+longitude.to_s+"&startdate=+1%2F1%2F2009",
-  headers:{
-    "X-Mashape-Key" => ENV['citizenrequest'],
-    "Accept" => "application/json"
-  }
-  @data = response.body
-  @data.each do |crime|
-  	if crime["description"].include?("DRUG")
-  		Report.create(popo_id: crime["id"],
-  									description: crime["description"],
-  									lat: crime["lat"],
-  									long: crime["long"]
-  									)
-  	end
-    if crime["description"].include?("NARCOTIC")
-      Report.create(popo_id: crime["id"],
-                    description: crime["description"],
-                    lat: crime["lat"],
-                    long: crime["long"]
-                    )
-    end
-    if crime["description"].include?("POSSESSION")
-      Report.create(popo_id: crime["id"],
-                    description: crime["description"],
-                    lat: crime["lat"],
-                    long: crime["long"]
-                    )
-    end
-  end
-	erb :seeding
-end
+#   response = Unirest.get "https://jgentes-Crime-Data-v1.p.mashape.com/crime?enddate=4%2F20%2F2015&lat="+latitude.to_s+"&long="+longitude.to_s+"&startdate=+1%2F1%2F2009",
+#   headers:{
+#     "X-Mashape-Key" => ENV['citizenrequest'],
+#     "Accept" => "application/json"
+#   }
+#   @data = response.body
+#   @data.each do |crime|
+#   	if crime["description"].include?("DRUG")
+#   		Report.create(popo_id: crime["id"],
+#   									description: crime["description"],
+#   									lat: crime["lat"],
+#   									long: crime["long"]
+#   									)
+#   	end
+#     if crime["description"].include?("NARCOTIC")
+#       Report.create(popo_id: crime["id"],
+#                     description: crime["description"],
+#                     lat: crime["lat"],
+#                     long: crime["long"]
+#                     )
+#     end
+#     if crime["description"].include?("POSSESSION")
+#       Report.create(popo_id: crime["id"],
+#                     description: crime["description"],
+#                     lat: crime["lat"],
+#                     long: crime["long"]
+#                     )
+#     end
+#   end
+# 	erb :seeding
+# end
 
 get '/sf' do
 
-  response = HTTParty.get ("http://sanfrancisco.crimespotting.org/crime-data?format=json&count=10&type=Na&dstart=2009-01-01&dend=2013-05-31")
+  response = HTTParty.get ("http://sanfrancisco.crimespotting.org/crime-data?format=json&count=1000&type=Na&dstart=2009-01-01&dend=2013-05-31")
 
   @data = response["features"]
   @data.each do |crime|
