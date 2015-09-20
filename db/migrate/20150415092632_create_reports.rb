@@ -6,6 +6,7 @@ class CreateReports < ActiveRecord::Migration
   		t.decimal :lat
   		t.decimal :long
   		t.datetime :datetime
+  		t.boolean :sale
 
   		t.timestamps
   	end

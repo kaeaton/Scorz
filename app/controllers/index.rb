@@ -74,11 +74,21 @@ get '/sf' do
   @data = response["features"]
   @data.each do |crime|
     unless crime["properties"]["description"].to_s.include? "PARAPHERNALIA"
-      Report.create(popo_id: crime["id"],
-                    description: crime["properties"]["description"],
-                    lat: crime["geometry"]["coordinates"][1],
-                    long: crime["geometry"]["coordinates"][0],
-                    datetime: crime["properties"]["date_time"])
+      if crime["properties"]["description"].to_s.include? "SALE"
+        Report.create(popo_id: crime["id"],
+                      description: crime["properties"]["description"],
+                      lat: crime["geometry"]["coordinates"][1],
+                      long: crime["geometry"]["coordinates"][0],
+                      datetime: crime["properties"]["date_time"],
+                      sale: true)
+      else
+        Report.create(popo_id: crime["id"],
+                      description: crime["properties"]["description"],
+                      lat: crime["geometry"]["coordinates"][1],
+                      long: crime["geometry"]["coordinates"][0],
+                      datetime: crime["properties"]["date_time"],
+                      sale: false)
+      end
     end
   end
 
