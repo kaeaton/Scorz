@@ -13,6 +13,16 @@ html, body, #map-canvas {
 
 img {padding-bottom: 20px;}
 
+a {
+  color: gray;
+}
+
+p {
+  margin: auto;
+  width: 90%;
+  padding-top: 10px;
+}
+
 .menu {
   float: right;
   margin: 150px 70px 0 0;
@@ -34,3 +44,5 @@ img {padding-bottom: 20px;}
   stroke: black;
   stroke-width: 1.5px;
 }
+
+
