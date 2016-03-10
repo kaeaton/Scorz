@@ -26,7 +26,6 @@ p {
 .menu {
   float: right;
   margin: 150px 70px 0 0;
-  color: black;
 }
 
 .scores, .scores svg {
@@ -46,4 +45,6 @@ p {
   stroke-width: 1.5px;
 }
 
-
+#dropdown {
+  color: black;
+}
