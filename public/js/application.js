@@ -129,9 +129,11 @@ $(document).ready(function() {
                   .style("left", (d.x - padding) + "px")
                   .style("top", (d.y - padding) + "px");
             }
+
+            this.setMap(map);
           }
         }
-        overlay.setMap(map);
+        
       // })
 
 

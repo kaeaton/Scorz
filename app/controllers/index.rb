@@ -83,7 +83,7 @@ end
 
 get '/sf' do
 
-  response = HTTParty.get ("http://sanfrancisco.crimespotting.org/crime-data?format=json&count=5000&type=Na&dstart=2009-01-01")
+  response = HTTParty.get ("http://sanfrancisco.crimespotting.org/crime-data?format=json&count=5000&type=Na&dstart=2013-01-01")
 
   @data = response["features"]
   @data.each do |crime|
